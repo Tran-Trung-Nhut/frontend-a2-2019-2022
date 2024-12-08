@@ -35,7 +35,7 @@ export default function AcceptedUser({
             {loading && (
                 <Loading/>
             )}
-            <div className="bg-gradient-to-br from-white to-gray-100 rounded-2xl shadow-xl w-[500px] p-4 relative border border-gray-200">
+            <div className="bg-gradient-to-br from-white to-gray-100 rounded-2xl shadow-xl w-[460px] p-4 relative border border-gray-200">
                 <h3 className="text-3xl font-bold text-gray-800 mb-6 text-center border-b pb-4">
                     <p>Danh sách tham gia</p>
                     {/* Center the quantity text here */}
@@ -49,7 +49,7 @@ export default function AcceptedUser({
                     {user.map((u) => (
                         <li
                             key={u.id}
-                            className="flex items-center gap-4 p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 w-[435px]"
+                            className="flex items-center gap-4 p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 w-[400px]"
                         >
                             <img
                                 src="https://i.pinimg.com/736x/c6/e5/65/c6e56503cfdd87da299f72dc416023d4.jpg"
