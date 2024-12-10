@@ -21,9 +21,9 @@ export default function Loading() {
   )}
         </p>
 
-        <p className="text-sm text-gray-500 italic mb-4">
+        {/* <p className="text-sm text-gray-500 italic mb-4">
           Ứng dụng được phát triển chưa đầy 5 tiếng nên còn nhiều sai sót, mong các bạn thông cảm.
-        </p>
+        </p> */}
 
         {/* <p className="text-sm text-gray-800 font-medium">
           Tính năng mới sắp ra mắt:{" "}

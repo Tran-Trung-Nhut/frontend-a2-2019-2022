@@ -16,7 +16,7 @@ function App() {
   const fetchUser = async () => {
     if(user.name !== '' || user.phoneNumber !== '') return
 
-    const existUser = sessionStorage.getItem('user')
+    const existUser = localStorage.getItem('user')
 
     if(!existUser) return
 

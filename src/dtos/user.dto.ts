@@ -3,6 +3,7 @@ export interface UserWithoutIdDto{
     phoneNumber: string
 }
 
+
 export interface UserDto{
     id: string,
     name: string,
@@ -14,4 +15,9 @@ export interface UserPaidDto{
     name: string,
     phoneNumber: string,
     paid: string
+}
+
+export const defaultLoginUser : UserWithoutIdDto = {
+    name: '',
+    phoneNumber: ''
 }

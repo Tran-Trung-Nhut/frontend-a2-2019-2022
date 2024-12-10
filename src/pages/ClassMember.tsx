@@ -34,7 +34,7 @@ export default function ClassMember() {
       {loading && (
         <Loading/>
       )}
-      <div className="w-full max-w-screen-lg px-4 py-8 text-center bg-black bg-opacity-60 rounded-xl shadow-2xl">
+      <div className="w-full max-w-screen min-h-screen px-4 py-8 text-center bg-black bg-opacity-60 shadow-2xl">
         <h1 className="text-5xl font-extrabold text-white mb-12 text-shadow-lg">
           Danh Sách Thành Viên Lớp
         </h1>

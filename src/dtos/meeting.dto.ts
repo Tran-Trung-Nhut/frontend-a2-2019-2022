@@ -1,3 +1,5 @@
+import { timeDescriptionWithoutId } from "./timeDescription.dto";
+
 export interface MeetingWithTimeDescriptionDto { 
     id: string, 
     date: string,
@@ -7,6 +9,14 @@ export interface MeetingWithTimeDescriptionDto {
         description: string
     }[]
 }
+
+export interface meetingWithTimeDescription {
+    id: string;
+    date: Date;
+    status: string;
+    timeDescription: timeDescriptionWithoutId[];
+}
+  
 
 export const defaultMeetingWithTimeDescription: MeetingWithTimeDescriptionDto = { 
     id: '', 

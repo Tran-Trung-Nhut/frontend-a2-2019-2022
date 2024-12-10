@@ -5,18 +5,7 @@ import { userState } from "../state";
 import { useNavigate } from "react-router-dom";
 import flagClass from "../assets/FlagClass.png"
 import Loading from "../components/Loading";
-
-interface timeDescriptionWithoutId {
-  time: string;
-  description: string;
-}
-
-interface meetingWithTimeDescription {
-  id: string;
-  date: Date;
-  status: string;
-  timeDescription: timeDescriptionWithoutId[];
-}
+import { meetingWithTimeDescription } from "../dtos/meeting.dto";
 
 export default function GetInvitationCard() {
   const [isPopupVisible, setIsPopupVisible] = useState(false);

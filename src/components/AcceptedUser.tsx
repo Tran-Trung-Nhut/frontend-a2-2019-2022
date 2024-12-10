@@ -3,6 +3,8 @@ import { UserPaidDto } from "../dtos/user.dto";
 import axios from "axios";
 import { MeetingWithTimeDescriptionDto } from "../dtos/meeting.dto";
 import Loading from "./Loading";
+import { useRecoilValue } from "recoil";
+import { userState } from "../state";
 
 export default function AcceptedUser({ 
     meeting, 
@@ -13,6 +15,7 @@ export default function AcceptedUser({
 }) {
     const [user, setUser] = useState<UserPaidDto[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
+    const userLogin = useRecoilValue(userState)
 
     const fetchAcceptedUser = async () => {
         try {
@@ -59,7 +62,7 @@ export default function AcceptedUser({
                             <div className="flex-1">
                                 <p className="text-lg font-semibold text-gray-800">{u.name}</p>
                                 <p className="text-sm text-gray-500">
-                                    {u.phoneNumber || "Chưa có SĐT"}
+                                    {userLogin.name !== "" ? u.phoneNumber || "Chưa có SĐT" : ""}
                                 </p>
                             </div>
                             {u.paid === "Yes" && meeting.status === "Yes" && (

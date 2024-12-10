@@ -40,7 +40,7 @@ export default function Login() {
 
       setLoading(false)
 
-      sessionStorage.setItem('user', JSON.stringify({name: fullName, phoneNumber: phoneNumber}))
+      localStorage.setItem('user', JSON.stringify({name: fullName, phoneNumber: phoneNumber}))
       if(response.data.message === 'Login successfully!') navigate('/')
     }catch(e: any){
       setLoading(false)
