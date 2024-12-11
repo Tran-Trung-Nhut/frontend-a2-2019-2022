@@ -1,12 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import background from "../assets/backgroundHome.jpg";
 import "./css/Home.css"
-import { useRecoilValue } from "recoil";
-import { userState } from "../state";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { dropDownHeaderState, userState } from "../state";
 
 export default function Home() {
   const navigate = useNavigate();
   const user = useRecoilValue(userState)
+  const setDropdownOpen = useSetRecoilState(dropDownHeaderState)
 
   const handleGetInvitation = () => {
     if(user.name !== '' && user.phoneNumber !== '') navigate('/invitation')
@@ -17,6 +18,7 @@ export default function Home() {
     <div
       className="min-h-screen bg-cover bg-center flex items-center justify-center home-page"
       style={{ backgroundImage: `url(${background})` }}
+      onClick={() => setDropdownOpen(false)}
     >
       <div className="flex flex-col items-center justify-center min-h-screen w-full bg-black bg-opacity-50 p-8">
         <div className="text-center">

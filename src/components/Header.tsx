@@ -1,14 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import logoClass from "../assets/logoClass.png";
 import { useRecoilState } from "recoil";
-import { userState } from "../state";
-import { useState } from "react";
+import { dropDownHeaderState, userState } from "../state";
 import { defaultLoginUser } from "../dtos/user.dto";
 
 export default function Header() {
   const navigate = useNavigate();
   const [user, setUser] = useRecoilState(userState)
-  const [isDropdownOpen, setDropdownOpen] = useState<boolean>(false);
+  const [isDropdownOpen, setDropdownOpen] = useRecoilState(dropDownHeaderState);
 
   const handleLogOut = () => {
     const confirm = window.confirm("Bạn có chắc muốn đăng xuống khỏi ứng dụng?")
@@ -23,7 +22,7 @@ export default function Header() {
 
 
   return (
-    <header className="shadow-2xl border flex items-center justify-between px-6 py-2">
+    <header className="shadow-2xl border flex items-center justify-between px-6 py-2" onClick={() => setDropdownOpen(false)}>
       <div className="flex items-center">
         <div className="flex-shrink-0">
           <img 
@@ -71,7 +70,10 @@ export default function Header() {
           <button
             type="button"
             className="font-semibold py-2 px-6 text-black rounded-lg border-2 shadow-md hover:shadow-lg hover:scale-110 active:scale-90"
-            onClick={() => setDropdownOpen(!isDropdownOpen)}
+            onClick={(e) => {
+              e.stopPropagation()
+              setDropdownOpen(!isDropdownOpen)
+            }}
           >
             {user.name}
           </button>

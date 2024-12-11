@@ -4,7 +4,6 @@ import axios from "axios";
 import { useRecoilValue } from "recoil";
 import { userState } from "../state";
 import Loading from "./Loading";
-import { UserPaidDto } from "../dtos/user.dto";
 import { toZonedTime } from 'date-fns-tz';
 
 
@@ -54,7 +53,6 @@ export default function Forum({
       const response = await axios.get(
         `https://backend-a2-2019-2022.onrender.com/message/meeting/${meetingId}`
       );
-      console.log(response.data)
       setMessages(response.data.data);
 
       setLoading(false);
@@ -69,14 +67,10 @@ export default function Forum({
   const fetchAcceptedUserAndCurrentMeeting = async () => {
     try{
       const responseUser = await axios.get(
-        `https://backend-a2-2019-2022.onrender.com/userMeeting/listUserAccepted/${meetingId}`
+        `https://backend-a2-2019-2022.onrender.com/userMeeting/listUserAccepted/name/${meetingId}`
       );
 
-      const namesUser = responseUser.data.data.map((name: UserPaidDto) => {
-        return name.name
-      })
-
-      setNames(namesUser)
+      setNames(responseUser.data.data)
 
       const response = await axios.get("https://backend-a2-2019-2022.onrender.com/meeting/yes");
       
@@ -162,9 +156,10 @@ export default function Forum({
                             : "text-left text-[#8b8f84]"
                         }`}
                       >
-                       {message.updateDate && message.updateDate !== message.createDate
+                       {/* {message.updateDate && message.updateDate !== message.createDate
                         ? `Chỉnh sửa lúc: ${toZonedTime(message.updateDate, 'UTC').toLocaleString()}`
-                        : `Gửi lúc: ${toZonedTime(message.createDate, 'UTC').toLocaleString()}`}
+                        : `Gửi lúc: ${toZonedTime(message.createDate, 'UTC').toLocaleString()}`} */}
+                        Gửi lúc: {toZonedTime(message.createDate, 'UTC').toLocaleString()}
                       </p>
                     </div>
                     {message.userName === user.name && (
@@ -224,9 +219,10 @@ export default function Forum({
                           : "text-left text-[#8b8f84]"
                       }`}
                     >
-                      {message.updateDate && message.updateDate !== message.createDate
-                        ? `Chỉnh sửa lúc: ${toZonedTime(message.updateDate, 'UTC')}`
-                        : `Gửi lúc: ${toZonedTime(message.createDate, 'UTC')}`}
+                      {/* {message.updateDate && message.updateDate !== message.createDate
+                        ? `Chỉnh sửa lúc: ${toZonedTime(message.updateDate, 'UTC').toLocaleString()}`
+                        : `Gửi lúc: ${toZonedTime(message.createDate, 'UTC').toLocaleString()}`} */}
+                      Gửi lúc: {toZonedTime(message.createDate, 'UTC').toLocaleString()}
                     </p>
                   </div>
                   {message.userName === user.name && (

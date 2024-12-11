@@ -6,6 +6,8 @@ import AcceptedUser from "../components/AcceptedUser";
 import Loading from "../components/Loading";
 import FeaturePopup from "../components/Feature";
 import Forum from "../components/ForumPopup";
+import { useSetRecoilState } from "recoil";
+import { dropDownHeaderState } from "../state";
 
 export default function Meeting() {
     const [meetings, setMeetings] = useState<MeetingWithTimeDescriptionDto[]>([]);
@@ -14,6 +16,7 @@ export default function Meeting() {
     const [loading, setLoading] = useState<boolean>(true)
     const [showNewFeature, setShowNewFeature] = useState<boolean>(false)
     const [isShowForum, setIsShowForum] = useState<boolean>(false)
+    const setDropdownOpen = useSetRecoilState(dropDownHeaderState)
 
     const fetchMeeting = async () => {
         try {
@@ -35,7 +38,7 @@ export default function Meeting() {
     }, []);
 
     return (
-        <div className="relative min-h-screen overflow-hidden">
+        <div className="relative min-h-screen overflow-hidden" onClick={() => setDropdownOpen(false)}>
             {isPopupOpen && (
                 <AcceptedUser
                 onClose={() => setIsPopupOpen(false)}

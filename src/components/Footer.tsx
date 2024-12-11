@@ -1,8 +1,12 @@
+import { useSetRecoilState } from "recoil";
 import hcmut from "../assets/hcmut.png"
+import { dropDownHeaderState } from "../state";
 
 export default function Footer() { 
+    const setDropdownOpen = useSetRecoilState(dropDownHeaderState)
+
     return (
-      <footer className="bg-gray-800 text-white py-4">
+      <footer className="bg-gray-800 text-white py-4" onClick={() => setDropdownOpen(false)}>
         <div className="container mx-auto px-6 text-center">
           <div className="mb-4">
             <img src={hcmut} alt="Logo" className="h-12 mx-auto" />

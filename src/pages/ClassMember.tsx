@@ -4,11 +4,14 @@ import background from "../assets/backgroundHome.jpg";
 import axios from "axios";
 import { UserDto } from "../dtos/user.dto";
 import Loading from "../components/Loading";
+import { useSetRecoilState } from "recoil";
+import { dropDownHeaderState } from "../state";
 
 export default function ClassMember() {
   // Danh sách tên và hình ảnh của các thành viên
   const [user, setUser] = useState<UserDto[]>([])
   const [loading, setLoading] = useState<boolean>(true)
+  const setDropdownOpen = useSetRecoilState(dropDownHeaderState)
 
   const fetchUsers = async () => {
     try{
@@ -34,7 +37,7 @@ export default function ClassMember() {
       {loading && (
         <Loading/>
       )}
-      <div className="w-full max-w-screen min-h-screen px-4 py-8 text-center bg-black bg-opacity-60 shadow-2xl">
+      <div className="w-full max-w-screen min-h-screen px-4 py-8 text-center bg-black bg-opacity-60 shadow-2xl" onClick={() => setDropdownOpen(false)}>
         <h1 className="text-5xl font-extrabold text-white mb-12 text-shadow-lg">
           Danh Sách Thành Viên Lớp
         </h1>
@@ -44,6 +47,7 @@ export default function ClassMember() {
             <div
               key={index}
               className="flex-shrink-0 w-48 bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
+              
             >
               <div className="flex flex-col items-center">
                 <img

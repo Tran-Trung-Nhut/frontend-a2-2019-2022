@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useRecoilValue } from "recoil";
-import { userState } from "../state";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { dropDownHeaderState, userState } from "../state";
 import { useNavigate } from "react-router-dom";
 import flagClass from "../assets/FlagClass.png"
 import Loading from "../components/Loading";
@@ -10,6 +10,7 @@ import { meetingWithTimeDescription } from "../dtos/meeting.dto";
 export default function GetInvitationCard() {
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [userId, setUserId] = useState<string>('')
+  const setDropdownOpen = useSetRecoilState(dropDownHeaderState)
   const [meeting, setMeeting] = useState<meetingWithTimeDescription>({
     id: "",
     date: new Date(),
@@ -56,15 +57,12 @@ export default function GetInvitationCard() {
 
   const handleConfirm = async () => {
     try{
-      const response = await axios.post('https://backend-a2-2019-2022.onrender.com/userMeeting/accept',{
+      await axios.post('https://backend-a2-2019-2022.onrender.com/userMeeting/accept',{
         userId,
         meetingId: meeting.id
       })
 
-      console.log(response)
-
-      alert("Cảm ơn bạn đã xác nhận tham dự!");
-
+      alert("Cảm ơn bạn đã xác nhận tham dự!");      
       navigate('/qr')
     }catch(e){
       alert("Xác nhận tham dự thất bại! Vui lòng thử lại sau!")
@@ -77,6 +75,7 @@ export default function GetInvitationCard() {
       style={{
         backgroundImage: `url(${flagClass})`, // Thêm đường dẫn đúng cho hình nền
       }}
+      onClick={() => setDropdownOpen(false)}
     >
       <div
         className={`bg-white/90 backdrop-blur-md p-8 rounded-2xl mt-20 shadow-2xl w-[650px] text-center border-2 border-blue-300 transform transition-all duration-700 ${

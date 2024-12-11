@@ -1,10 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import qr from "../assets/qr.jpg"
+import { useSetRecoilState } from "recoil";
+import { dropDownHeaderState } from "../state";
 
 export default function QR() {
     const navigate = useNavigate()
+    const setDropdownOpen = useSetRecoilState(dropDownHeaderState)
     return (
-        <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-blue-50 to-green-100">
+        <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-blue-50 to-green-100" onClick={() => setDropdownOpen(false)}>
             <div className="bg-white rounded-lg shadow-2xl w-[700px] p-5 relative border border-gray-200 my-5">
                 <h2 className="text-3xl font-semibold text-center text-gray-800 mb-6">Thanh Toán Cọc</h2>
                 <p className="text-lg text-gray-700 mb-6 text-center leading-relaxed">
@@ -36,7 +39,10 @@ export default function QR() {
                 {/* Back Button */}
                 <div className="text-center">
                     <button 
-                        onClick={() => navigate('/invitation')} 
+                        onClick={() => {
+                            setDropdownOpen(false)
+                            navigate('/invitation')
+                        }} 
                         className="mt-4 px-6 py-2 bg-gray-700 text-white rounded-full hover:bg-gray-600 transition"
                     >
                         Quay lại

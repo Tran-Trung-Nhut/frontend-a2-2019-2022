@@ -5,3 +5,8 @@ export const userState = atom<UserWithoutIdDto>({
     key: 'userState',
     default: defaultLoginUser
 })
+
+export const dropDownHeaderState = atom<boolean>({
+    key: 'dropDownHeaderState',
+    default: false
+})
