@@ -1,13 +1,15 @@
 export interface UserWithoutIdDto{
     name: string,
-    phoneNumber: string
+    phoneNumber: string,
+    role: string
 }
 
 
 export interface UserDto{
     id: string,
     name: string,
-    phoneNumber: string
+    phoneNumber: string,
+    role: string
 }
 
 export interface UserPaidDto{
@@ -19,5 +21,6 @@ export interface UserPaidDto{
 
 export const defaultLoginUser : UserWithoutIdDto = {
     name: '',
-    phoneNumber: ''
+    phoneNumber: '',
+    role: '',
 }

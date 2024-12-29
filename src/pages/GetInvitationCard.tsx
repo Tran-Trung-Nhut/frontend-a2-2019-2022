@@ -73,7 +73,7 @@ export default function GetInvitationCard() {
     <div
       className="h-screen w-screen bg-cover bg-center flex items-center justify-center"
       style={{
-        backgroundImage: `url(${flagClass})`, // Thêm đường dẫn đúng cho hình nền
+        backgroundImage: `url(${flagClass})`, 
       }}
       onClick={() => setDropdownOpen(false)}
     >

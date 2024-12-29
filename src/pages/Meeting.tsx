@@ -98,7 +98,6 @@ export default function Meeting() {
                             </tbody>
                         </table>
 
-                        {/* Nút "Xem người tham gia" */}
                         <button
                             type="button"
                             className="mt-4 px-4 py-2 w-full bg-blue-600 text-white rounded-full font-semibold text-sm shadow-md hover:bg-blue-700 hover:scale-110 focus:ring-2 focus:ring-blue-400 transition duration-300"

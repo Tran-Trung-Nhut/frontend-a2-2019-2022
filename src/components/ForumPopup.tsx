@@ -113,7 +113,7 @@ export default function Forum({
             </p>
           ) : (
             currentMeeting === meetingId ? (
-              names.includes(user.name) ? (
+              names.includes(user.name) || user.role === "Chủ nhiệm" ? (
                 messages.map((message) => (
                   <div
                     key={message.id}
@@ -246,8 +246,8 @@ export default function Forum({
 
         {/* Footer */}
         <div className="p-4 border-t bg-[#d1e4dd] flex items-center space-x-2 shadow-inner">
-            {currentMeeting === meetingId ? (
-              user.name !== "" && names.includes(user.name) && (
+            {currentMeeting === meetingId || user.role === "Chủ nhiệm"? (
+              user.name !== "" && ( names.includes(user.name) || user.role === "Chủ nhiệm" ) && (
                 <>
                  <input
                  type="text"
@@ -264,7 +264,7 @@ export default function Forum({
                 </>
                )
             ) : (
-              user.name !== "" && (
+              user.name !== "" &&  (
                 <>
                  <input
                  type="text"

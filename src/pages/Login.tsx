@@ -33,9 +33,11 @@ export default function Login() {
         phoneNumber
       })
 
+
       setUser({
           name: fullName,
-          phoneNumber
+          phoneNumber,
+          role: response.data.role
       })
 
       setLoading(false)

@@ -49,7 +49,7 @@ export default function Header() {
             style={{ border: 'none' }}
             onClick={() => navigate('/class-member')}
           >
-            Danh Sách Lớp
+            Thành viên
           </button>
         </div>
 
