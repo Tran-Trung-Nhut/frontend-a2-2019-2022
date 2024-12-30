@@ -1,5 +1,4 @@
 import { UserDto } from "../dtos/user.dto";
-import background from "../assets/backgroundHome.jpg";
 
 const OrgChartNode = ({ name, role, avatar }: { name: string; role: string; avatar: string }) => {
   return (
@@ -25,12 +24,10 @@ const OrgChart = ({ data }: { data: UserDto[] }) => {
     <div className="flex flex-col items-center space-y-16 mt-10">
       {groupedData.map((group, index) => (
         <div key={index} className="w-full">
-          {/* Tên vai trò */}
           <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-500 text-center mb-6">
             {roles[index]}
           </h2>
 
-          {/* Nhóm thành viên */}
           <div className="flex flex-wrap justify-center gap-6 sm:gap-8 md:gap-10">
             {group.map((member, idx) => (
               <OrgChartNode
@@ -57,7 +54,6 @@ export default function ClassStructurePage({
   return (
     <div className="fixed inset-0 z-50 bg-gradient-to-br from-purple-400 via-indigo-500 to-blue-600 flex justify-center items-center">
       <div className="relative w-full h-full sm:w-[95%] sm:h-[90%] p-6 sm:p-10 bg-white bg-opacity-80 rounded-xl shadow-2xl overflow-auto">
-        {/* Nút quay lại */}
         <button
           onClick={() => onClose()}
           className="absolute top-6 left-6 text-xl sm:text-2xl text-gray-700 hover:text-gray-900 transition duration-200"
@@ -65,14 +61,12 @@ export default function ClassStructurePage({
           &#8592; Quay lại
         </button>
 
-        {/* Tiêu đề */}
         <div className="flex justify-center items-center mb-12">
           <h1 className="text-4xl sm:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 shadow-lg">
             Cơ Cấu Lớp Học
           </h1>
         </div>
 
-        {/* Hiển thị thông tin các thành viên */}
         <OrgChart data={members} />
       </div>
     </div>
