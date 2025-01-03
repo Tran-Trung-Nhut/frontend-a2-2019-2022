@@ -77,14 +77,14 @@ export default function GetInvitationCard() {
       }}
       onClick={() => setDropdownOpen(false)}
     >
+      {loading && (
+          <Loading/>
+        )}
       <div
         className={`bg-white/90 backdrop-blur-md p-8 rounded-2xl mt-20 shadow-2xl w-[650px] text-center border-2 border-blue-300 transform transition-all duration-700 ${
           isPopupVisible ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-75 translate-y-12"
         }`}
       >
-        {loading && (
-          <Loading/>
-        )}
         <h2 className="text-4xl font-extrabold text-gray-900 mb-6 tracking-wide animate__animated animate__fadeIn animate__delay-1s">
           🎉 Thiệp Mời 🎉
         </h2>

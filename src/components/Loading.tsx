@@ -4,7 +4,7 @@ import "./css/Loading.css"
 export default function Loading() {
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-60 z-50">
-      <div className="bg-white rounded-xl shadow-xl p-8 text-center w-[500px]">
+      <div className="bg-white rounded-xl shadow-xl p-8 text-center w-[90%] max-w-md sm:w-[80%] md:w-[70%]">
         <img
           src={waiting}
           alt="Loading Icon"
@@ -18,12 +18,12 @@ export default function Loading() {
                 {word}&nbsp;
               </span>
             )
-  )}
+          )}
         </p>
 
-        {/* <p className="text-sm text-gray-500 italic mb-4">
-          Ứng dụng được phát triển chưa đầy 5 tiếng nên còn nhiều sai sót, mong các bạn thông cảm.
-        </p> */}
+        <p className="text-sm text-gray-500 italic mb-4">
+          Ở lần đầu truy cập sẽ phải chờ lâu do máy chủ sẽ cần tối đa <i className="font-bold">1 phút</i> để khởi động lại sau 30 phút không được truy cập. <p>Mong các bạn thông cảm!</p>
+        </p>
 
         {/* <p className="text-sm text-gray-800 font-medium">
           Tính năng mới sắp ra mắt:{" "}

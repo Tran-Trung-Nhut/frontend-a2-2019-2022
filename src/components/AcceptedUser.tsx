@@ -38,7 +38,7 @@ export default function AcceptedUser({
             {loading && (
                 <Loading/>
             )}
-            <div className="bg-gradient-to-br from-white to-gray-100 rounded-2xl shadow-xl w-[460px] p-4 relative border border-gray-200">
+            <div className="bg-gradient-to-br from-white to-gray-100 rounded-2xl shadow-xl w-[460px] p-4 relative border border-gray-200 sm:h-[100%] md:h-[450px] h-[100%]">
                 <h3 className="text-3xl font-bold text-gray-800 mb-6 text-center border-b pb-4">
                     <p>Danh sách tham gia</p>
                     {/* Center the quantity text here */}
@@ -48,7 +48,7 @@ export default function AcceptedUser({
                         </p>
                     </div>         
                 </h3>
-                <ul className="space-y-4 max-h-60 overflow-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
+                <ul className="space-y-4 md:max-h-60 sm:max-h-[280px] h-[75%] overflow-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
                     {user.map((u) => (
                         <li
                             key={u.id}

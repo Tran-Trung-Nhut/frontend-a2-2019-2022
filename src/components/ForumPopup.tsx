@@ -93,7 +93,7 @@ export default function Forum({
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
       {loading && <Loading />}
-      <div className="w-full max-w-[600px] bg-[#f0f4f1] rounded-lg shadow-lg overflow-hidden">
+      <div className="w-full max-w-[600px] bg-[#f0f4f1] rounded-lg shadow-lg md:overflow-hidden md:h-[87%] h-[100%]">
         {/* Header */}
         <div className="p-4 border-b bg-[#d1e4dd] shadow-md flex justify-center items-center">
           <button
@@ -106,7 +106,7 @@ export default function Forum({
 
         {/* Message List */}
         {user.name !== "" ? (
-          <div className="p-4 h-80 overflow-y-auto space-y-4 bg-white">
+          <div className="p-4 sm:h-[100%] md:h-80 h-[85%] overflow-y-auto space-y-4 bg-white">
           {messages.length === 0 ? (
             <p className="text-center text-[#6a6a6a] font-semibold">
               Không có tin nhắn nào trong diễn đàn.
@@ -239,12 +239,11 @@ export default function Forum({
           <div ref={messageEndRef} />
         </div>
         ) : (
-          <div className="p-4 h-80 overflow-y-auto space-y-4 bg-white">
+          <div className="p-4 md:h-[77%] sm:h-[90%] h-[89%] overflow-y-auto space-y-4 bg-white">
               <p className="text-gray-500 text-center font-bold text-xl"><i>Vui lòng đăng nhập để xem diễn đàn</i></p>
           </div>
         )}
 
-        {/* Footer */}
         <div className="p-4 border-t bg-[#d1e4dd] flex items-center space-x-2 shadow-inner">
             {currentMeeting === meetingId || user.role === "Chủ nhiệm"? (
               user.name !== "" && ( names.includes(user.name) || user.role === "Chủ nhiệm" ) && (

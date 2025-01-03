@@ -61,7 +61,7 @@ export default function ClassStructurePage({
           &#8592; Quay lại
         </button>
 
-        <div className="flex justify-center items-center mb-12">
+        <div className="flex justify-center items-center mb-12 mt-8">
           <h1 className="text-4xl sm:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 shadow-lg">
             Cơ Cấu Lớp Học
           </h1>
