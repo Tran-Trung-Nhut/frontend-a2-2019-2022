@@ -172,7 +172,7 @@ export default function Forum({
                   </div>
                 ))
               ) : (
-                <div className="p-4 h-80 overflow-y-auto space-y-4 bg-white">
+                <div className="p-4 sm:h-[100%] md:h-80 h-[85%] overflow-y-auto space-y-4 bg-white">
                   <p className="text-gray-500 text-center font-bold text-xl"><i>Hãy xác nhận tham gia để xem diễn đàn</i></p>
                 </div>
               )
