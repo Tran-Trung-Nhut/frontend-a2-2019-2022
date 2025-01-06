@@ -93,7 +93,7 @@ export default function Forum({
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
       {loading && <Loading />}
-      <div className="w-full max-w-[600px] bg-[#f0f4f1] rounded-lg shadow-lg md:overflow-hidden md:h-[87%] h-[100%]">
+      <div className="w-full max-w-[600px] bg-[#f0f4f1] rounded-lg shadow-lg overflow-hidden md:h-[87%] h-[100%]">
         {/* Header */}
         <div className="p-4 border-b bg-[#d1e4dd] shadow-md flex justify-center items-center">
           <button

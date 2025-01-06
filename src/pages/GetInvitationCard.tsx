@@ -101,7 +101,7 @@ export default function GetInvitationCard() {
           <span className="font-bold text-gray-400">8g00, ngày 26/1/2025 (nhằm ngày 27/12/2024 âm lịch)</span>
         </p>
         <p className="text-lg font-semibold text-blue-600 mt-4 animate__animated animate__fadeIn animate__delay-5s">
-          Địa điểm: <span className="font-bold text-gray-400">Được thông báo sau thông qua "Diễn đàn" (<i>Sắp ra mắt</i>).</span>
+          Địa điểm: <span className="font-bold text-gray-400">Đã được thông báo thông qua <i>Diễn đàn</i>.</span>
         </p>
 
         {/* Schedule Table */}
