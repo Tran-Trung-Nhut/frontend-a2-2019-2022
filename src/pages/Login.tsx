@@ -12,6 +12,7 @@ export default function Login() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const setUser = useSetRecoilState(userState)
   const [loading, setLoading] = useState<boolean>(false)
+  const [err, setErr] = useState<string>("")
 
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -46,7 +47,7 @@ export default function Login() {
       if(response.data.message === 'Login successfully!') navigate('/')
     }catch(e: any){
       setLoading(false)
-      alert(e.response.data.message)
+      setErr(e.response.data.message)
     }
 
   };
@@ -74,7 +75,7 @@ export default function Login() {
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
               placeholder="Nhập họ và tên"
-              className="text-black w-full p-4 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
+              className={`text-black w-full p-4 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 ${err === "Tên này không có trong lớp A2! Vui lòng nhập thật chính xác!"?'border-red-500': ''}`}
             />
           </div>
           <div className="mb-8">
@@ -87,8 +88,13 @@ export default function Login() {
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
               placeholder="Nhập số điện thoại"
-              className="text-black w-full p-4 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
+              className={`text-black w-full p-4 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 ${err === "Số điện thoại không chính xác! Vui lòng nhập lại!"?'border-red-500': ''}`}
             />
+            {err && (
+              <div className="text-red-500 text-center mt-4 text-sm">
+                {err}
+              </div>
+            )}
           </div>
           <button
             type="submit"
