@@ -23,9 +23,11 @@ export default function Header() {
 
   const handleNavigate = async (page: string) => {
     try {
-      await axios.patch('https://backend-a2-2019-2022.onrender.com/user/lastAccess',{
-        name: user.name,
-      })
+      if(user.name !== ''){
+        await axios.patch('https://backend-a2-2019-2022.onrender.com/user/lastAccess',{
+          name: user.name,
+        })
+      }
 
       navigate(page)
     } catch (error) {
