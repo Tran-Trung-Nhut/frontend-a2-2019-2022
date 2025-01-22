@@ -62,12 +62,28 @@ export default function GetInvitationCard() {
         meetingId: meeting.id
       })
 
+      await axios.patch('https://backend-a2-2019-2022.onrender.com/user/lastAccess',{
+        name: user.name,
+      })
+
       alert("Cảm ơn bạn đã xác nhận tham dự!");      
       navigate('/qr')
     }catch(e){
       alert("Xác nhận tham dự thất bại! Vui lòng thử lại sau!")
     }
   };
+
+  const handleGetQR = async () => {
+    try{
+      await axios.patch('https://backend-a2-2019-2022.onrender.com/user/lastAccess',{
+        name: user.name,
+      })
+
+      navigate('/qr')
+    }catch(e){
+      alert('Có lỗi xảy ra vui lòng thử lại!')
+    }
+  }
 
   return (
     <div
@@ -134,7 +150,7 @@ export default function GetInvitationCard() {
         {isAccepted ? (
           <button
             className="mt-6 bg-gradient-to-r from-blue-400 to-blue-600 text-white font-bold py-3 px-6 rounded-full shadow-lg hover:shadow-xl hover:from-blue-500 hover:to-blue-700 transition-all duration-300 transform hover:scale-110 hover:rotate-3 animate__animated animate__pulse animate__infinite animate__delay-9s"
-            onClick={() => navigate('/qr')}
+            onClick={() => handleGetQR()}
           >
             QR chuyển khoản
           </button>

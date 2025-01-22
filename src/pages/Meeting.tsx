@@ -6,8 +6,8 @@ import AcceptedUser from "../components/AcceptedUser";
 import Loading from "../components/Loading";
 import FeaturePopup from "../components/Feature";
 import Forum from "../components/ForumPopup";
-import { useSetRecoilState } from "recoil";
-import { dropDownHeaderState } from "../state";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { dropDownHeaderState, userState } from "../state";
 
 export default function Meeting() {
     const [meetings, setMeetings] = useState<MeetingWithTimeDescriptionDto[]>([]);
@@ -17,6 +17,7 @@ export default function Meeting() {
     const [showNewFeature, setShowNewFeature] = useState<boolean>(false)
     const [isShowForum, setIsShowForum] = useState<boolean>(false)
     const setDropdownOpen = useSetRecoilState(dropDownHeaderState)
+    const user = useRecoilValue(userState)
 
     const fetchMeeting = async () => {
         try {
@@ -28,9 +29,28 @@ export default function Meeting() {
         }
     };
 
-    const handleShowUser = (meeting: MeetingWithTimeDescriptionDto) => {
-        setSelectedMeeting(meeting),
-        setIsPopupOpen(true)
+    const handleShowUser = async (meeting: MeetingWithTimeDescriptionDto) => {
+        try {
+            await axios.patch('https://backend-a2-2019-2022.onrender.com/user/lastAccess',{
+                name: user.name,
+            })
+            setSelectedMeeting(meeting),
+            setIsPopupOpen(true)
+        } catch (error) {
+            alert("Có lỗi xảy ra vui lòng thử lại!")
+        }
+    }
+
+    const handleShowForum = async (meeting: MeetingWithTimeDescriptionDto) => {
+        try {
+            await axios.patch('https://backend-a2-2019-2022.onrender.com/user/lastAccess',{
+                name: user.name,
+            })
+            setSelectedMeeting(meeting)
+            setIsShowForum(true)
+        } catch (error) {
+            alert("Có lỗi xảy ra vui lòng thử lại!")
+        }
     }
 
     useEffect(() => {
@@ -108,10 +128,7 @@ export default function Meeting() {
                         <button
                             type="button"
                             className="mt-4 px-4 py-2 w-full border-2 border-blue-600 text-blue-600 rounded-full font-semibold text-sm shadow-md hover:scale-110  focus:ring-2 focus:ring-blue-400 transition duration-300"
-                            onClick={() => {
-                                setSelectedMeeting(meeting)
-                                setIsShowForum(true)
-                            }}
+                            onClick={() => handleShowForum(meeting)}
                         >
                             Diễn đàn
                         </button>
