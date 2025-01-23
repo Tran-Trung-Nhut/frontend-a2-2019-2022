@@ -3,7 +3,6 @@ import logoClass from "../assets/logoClass.png";
 import { useRecoilState } from "recoil";
 import { dropDownHeaderState, userState } from "../state";
 import { defaultLoginUser } from "../dtos/user.dto";
-import axios from "axios";
 
 export default function Header() {
   const navigate = useNavigate();
@@ -19,20 +18,6 @@ export default function Header() {
     setUser(defaultLoginUser)
 
     navigate('/')
-  }
-
-  const handleNavigate = async (page: string) => {
-    try {
-      if(user.name !== ''){
-        await axios.patch('https://backend-a2-2019-2022.onrender.com/user/lastAccess',{
-          name: user.name,
-        })
-      }
-
-      navigate(page)
-    } catch (error) {
-      alert("Có lỗi xảy ra vui lòng thử lại sau!")
-    }
   }
 
 
@@ -62,7 +47,7 @@ export default function Header() {
           <button
             className="text-black font-semibold h-auto hover:scale-110 active:scale-90"
             style={{ border: 'none' }}
-            onClick={() => handleNavigate('/class-member')}
+            onClick={() => navigate('/class-member')}
           >
             Thành viên
           </button>
@@ -72,7 +57,7 @@ export default function Header() {
           <button
             className="text-black font-semibold h-auto hover:scale-110 active:scale-90"
             style={{ border: 'none' }}
-            onClick={() => handleNavigate('/meeting')}
+            onClick={() => navigate('/meeting')}
           >
             Họp Lớp
           </button>

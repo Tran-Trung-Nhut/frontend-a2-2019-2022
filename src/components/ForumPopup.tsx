@@ -55,6 +55,12 @@ export default function Forum({
       );
       setMessages(response.data.data);
 
+      if(user.name !== ''){
+        await axios.patch('https://backend-a2-2019-2022.onrender.com/user/lastAccess',{
+            name: user.name,
+        })
+      }
+
       setLoading(false);
     } catch (e: any) {
       if (e.response.data.message === "Không có tin nhắn nào tồn tại!") {

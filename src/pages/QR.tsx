@@ -1,11 +1,27 @@
 import { useNavigate } from "react-router-dom";
 import qr from "../assets/qr.jpg"
-import { useSetRecoilState } from "recoil";
-import { dropDownHeaderState } from "../state";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { dropDownHeaderState, userState } from "../state";
+import { useEffect } from "react";
+import axios from "axios";
 
 export default function QR() {
     const navigate = useNavigate()
     const setDropdownOpen = useSetRecoilState(dropDownHeaderState)
+    const user = useRecoilValue(userState)
+
+    const updateLastAccess = async () =>{
+        if(user.name !== ''){
+            await axios.patch('https://backend-a2-2019-2022.onrender.com/user/lastAccess',{
+                name: user.name,
+            })
+        }
+    }
+
+    useEffect(() => {
+        updateLastAccess()
+    },[])
+
     return (
         <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-blue-50 to-green-100" onClick={() => setDropdownOpen(false)}>
             <div className="bg-white rounded-lg shadow-2xl w-[700px] p-5 relative border border-gray-200 my-5">

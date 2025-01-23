@@ -40,9 +40,15 @@ export default function GetInvitationCard() {
       const r = await axios.get(`https://backend-a2-2019-2022.onrender.com/userMeeting/${res.data.data.id}/isAccepted/${response.data.data.id}`)
       console.log(r.data)
 
-      setLoading(false)
-
       if(r.data.message === 'Bạn đã tham gia buổi họp lớp này rồi!') setIsAccepted(true)
+
+      if(user.name !== ''){
+          await axios.patch('https://backend-a2-2019-2022.onrender.com/user/lastAccess',{
+              name: user.name,
+          })
+      }
+
+      setLoading(false)
     } catch (e: any) {
       console.log(e);
       if(e.response.data.message === 'Bạn chưa tham gia buổi họp lớp này!') setLoading(false)
@@ -62,10 +68,6 @@ export default function GetInvitationCard() {
         meetingId: meeting.id
       })
 
-      await axios.patch('https://backend-a2-2019-2022.onrender.com/user/lastAccess',{
-        name: user.name,
-      })
-
       alert("Cảm ơn bạn đã xác nhận tham dự!");      
       navigate('/qr')
     }catch(e){
@@ -75,10 +77,6 @@ export default function GetInvitationCard() {
 
   const handleGetQR = async () => {
     try{
-      await axios.patch('https://backend-a2-2019-2022.onrender.com/user/lastAccess',{
-        name: user.name,
-      })
-
       navigate('/qr')
     }catch(e){
       alert('Có lỗi xảy ra vui lòng thử lại!')

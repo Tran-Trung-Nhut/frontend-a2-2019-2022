@@ -3,8 +3,8 @@ import background from "../assets/backgroundHome.jpg";
 import axios from "axios";
 import { UserDto } from "../dtos/user.dto";
 import Loading from "../components/Loading";
-import { useSetRecoilState } from "recoil";
-import { dropDownHeaderState } from "../state";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { dropDownHeaderState, userState } from "../state";
 import ClassStructurePage from "../components/ClassStructure";
 
 export default function ClassMember() {
@@ -13,6 +13,7 @@ export default function ClassMember() {
   const [showClassStructure, setShowClassStructure] = useState<boolean>(false)
   const [nameUser, setNameUser] = useState<string[]>([])
   const setDropdownOpen = useSetRecoilState(dropDownHeaderState)
+  const userLogin = useRecoilValue(userState)
 
   const fetchUsers = async () => {
     try{
@@ -25,6 +26,12 @@ export default function ClassMember() {
         .map((user: UserDto) => user.name); 
         
         setNameUser(tempNameUser)
+
+        if(userLogin.name !== ''){
+          await axios.patch('https://backend-a2-2019-2022.onrender.com/user/lastAccess',{
+            name: userLogin.name,
+          })
+        }
         setLoading(false)
     }catch(e){
         console.log(e)

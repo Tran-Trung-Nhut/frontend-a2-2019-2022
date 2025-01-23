@@ -22,8 +22,15 @@ export default function Meeting() {
     const fetchMeeting = async () => {
         try {
             const response = await axios.get('https://backend-a2-2019-2022.onrender.com/meeting');
-            setLoading(false)
+
+            if(user.name !== ''){
+                await axios.patch('https://backend-a2-2019-2022.onrender.com/user/lastAccess',{
+                    name: user.name,
+                })
+            }
+            
             setMeetings(response.data.data);
+            setLoading(false)
         } catch (e) {
             console.log(e);
         }
@@ -31,11 +38,6 @@ export default function Meeting() {
 
     const handleShowUser = async (meeting: MeetingWithTimeDescriptionDto) => {
         try {
-            if(user.name !== ''){
-                await axios.patch('https://backend-a2-2019-2022.onrender.com/user/lastAccess',{
-                name: user.name,
-                })
-            }
             setSelectedMeeting(meeting),
             setIsPopupOpen(true)
         } catch (error) {
@@ -45,11 +47,6 @@ export default function Meeting() {
 
     const handleShowForum = async (meeting: MeetingWithTimeDescriptionDto) => {
         try {
-            if(user.name !== ''){
-                await axios.patch('https://backend-a2-2019-2022.onrender.com/user/lastAccess',{
-                    name: user.name,
-                })
-            }
             setSelectedMeeting(meeting)
             setIsShowForum(true)
         } catch (error) {

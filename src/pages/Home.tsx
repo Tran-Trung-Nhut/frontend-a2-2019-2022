@@ -3,7 +3,6 @@ import background from "../assets/backgroundHome.jpg";
 import "./css/Home.css"
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { dropDownHeaderState, userState } from "../state";
-import axios from "axios";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -11,16 +10,8 @@ export default function Home() {
   const setDropdownOpen = useSetRecoilState(dropDownHeaderState)
 
   const handleGetInvitation = async () => {
-    if(user.name !== '' && user.phoneNumber !== '') {
-      try {
-        await axios.patch('https://backend-a2-2019-2022.onrender.com/user/lastAccess',{
-          name: user.name,
-        })
-        navigate('/invitation')
-      } catch (error) {
-        alert('Có lỗi xảy ra vui lòng thử lại!')
-      }
-    } else navigate('/login')
+    if(user.name !== '' && user.phoneNumber !== '') navigate('/invitation') 
+    else navigate('/login')
   }
 
   return (

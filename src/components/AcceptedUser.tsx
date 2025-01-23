@@ -22,8 +22,16 @@ export default function AcceptedUser({
             const response = await axios.get(
                 `https://backend-a2-2019-2022.onrender.com/userMeeting/listUserAccepted/${meeting.id}`
             );
-            setLoading(false);
+
             setUser(response.data.data);
+
+            if(userLogin.name !== ''){
+                await axios.patch('https://backend-a2-2019-2022.onrender.com/user/lastAccess',{
+                    name: userLogin.name,
+                })
+            }
+
+            setLoading(false);
         } catch (e) {
             console.log(e);
         }
