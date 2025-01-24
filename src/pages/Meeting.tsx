@@ -92,8 +92,8 @@ export default function Meeting() {
                         <p className="text-lg font-semibold text-gray-800">
                             <strong>Ngày diễn ra:</strong> {meeting.date}
                         </p>
-                        <p className="text-md text-gray-600 mt-2">
-                            <strong>Trạng thái:</strong> {meeting.status === 'Yes' ? 'Sắp tới' : 'Đã xong'}
+                        <p className={`text-md mt-2 ${meeting.status === 'Yes' ? 'text-green-600' : 'text-gray-600'}`}>
+                            <strong className="text-gray-600">Trạng thái:</strong> {meeting.status === 'Yes' ? 'Sắp tới' : 'Đã kết thúc'}
                         </p>
 
                         <h4 className="text-lg font-bold text-blue-800 mt-4">Lịch trình:</h4>
