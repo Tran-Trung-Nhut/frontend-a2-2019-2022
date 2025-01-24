@@ -1,0 +1,26 @@
+.swiper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; 
+}
+
+@media (max-width: 640px) {
+    .swiper {
+        height: 80vh; 
+    }
+
+    .swiper-slide {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%; 
+    height: auto; 
+}

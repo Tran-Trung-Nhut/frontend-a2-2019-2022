@@ -9,6 +9,8 @@ import Login from './pages/Login';
 import ClassMember from './pages/ClassMember';
 import Meeting from './pages/Meeting';
 import QR from './pages/QR';
+import './styles.css';
+
 
 function App() {
   const [user, setUser] = useRecoilState(userState)

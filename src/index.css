@@ -45,3 +45,34 @@ h1 {
     background-color: #ffffff;
   }
 }
+
+/* CSS căn giữa Swiper */
+.swiper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%; /* Chiều cao chiếm toàn bộ container */
+}
+
+/* Điều chỉnh trên màn hình nhỏ */
+@media (max-width: 640px) {
+  .swiper {
+      height: 80vh; /* Điều chỉnh chiều cao Swiper */
+  }
+
+  .swiper-slide {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+}
+
+/* Đảm bảo các slide không bị lệch */
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%; /* Đảm bảo chiếm đủ chiều ngang */
+  height: auto; /* Điều chỉnh chiều cao theo nội dung */
+}
+
