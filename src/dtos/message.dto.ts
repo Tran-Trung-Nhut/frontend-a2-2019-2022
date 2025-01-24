@@ -4,5 +4,5 @@ export interface MessageDto {
     meetingId: string;
     createDate: Date;     
     updateDate: Date;  
-    content: String   
+    content: string   
 }

@@ -34,6 +34,7 @@ export default function Forum({
     }
 
     try{
+      setLoading(true)
       await axios.post('https://backend-a2-2019-2022.onrender.com/message/create',{
         content,
         meetingId,
@@ -43,6 +44,7 @@ export default function Forum({
       fetchMessages()
 
       setContent("")
+      setLoading(false)
     }catch(e){
       alert("Đang có lỗi bên phái server! Vui lòng thử lại sau!")
     }
@@ -84,6 +86,25 @@ export default function Forum({
     }catch(e){
       setNames([])
       setCurrentMeeting("")
+    }
+  }
+
+  const handleUndoMessage = async (messageId: string) => {
+    const confirm = window.confirm("Bạn có chắc muốn thu hồi đoạn tin nhắn này?")
+
+    if(!confirm) {
+      return
+    }
+
+    try {
+      setLoading(true)
+      await axios.delete(`https://backend-a2-2019-2022.onrender.com/message/undo/${messageId}`)
+
+      fetchMessages()
+
+      setLoading(false)
+    } catch (error) {
+      alert("Không thể xóa tin nhắn ngay lúc này, vui lòng thử lại sau!")
     }
   }
 
@@ -153,7 +174,7 @@ export default function Forum({
                             : "bg-[#e7f2f1] text-[#4b4e42]"
                         }`}
                       >
-                        <p className="text-sm">{message.content}</p>
+                        <p className="text-sm">{message.updateDate !== null ? message.content : <i className="italic">Tin nhắn đã được thu hồi</i>}</p>
                       </div>
                       <p
                         className={`text-xs mt-1 ${
@@ -162,6 +183,18 @@ export default function Forum({
                             : "text-left text-[#8b8f84]"
                         }`}
                       >
+                       {message.userName === user.name && message.updateDate !== null && (
+                          <>
+                            <button 
+                            type="button"
+                            className="font-bold hover:underline"
+                            onClick={() => handleUndoMessage(message.id)}
+                            >
+                              ↺ Thu hồi
+                            </button>
+                            <>  |  </>
+                          </>   
+                       )}                  
                        {/* {message.updateDate && message.updateDate !== message.createDate
                         ? `Chỉnh sửa lúc: ${toZonedTime(message.updateDate, 'UTC').toLocaleString()}`
                         : `Gửi lúc: ${toZonedTime(message.createDate, 'UTC').toLocaleString()}`} */}
@@ -216,7 +249,7 @@ export default function Forum({
                           : "bg-[#e7f2f1] text-[#4b4e42]"
                       }`}
                     >
-                      <p className="text-sm">{message.content}</p>
+                      <p className="text-sm">{message.updateDate !== null ? message.content : <i className="italic">Tin nhắn đã được thu hồi</i>}</p>
                     </div>
                     <p
                       className={`text-xs mt-1 ${
