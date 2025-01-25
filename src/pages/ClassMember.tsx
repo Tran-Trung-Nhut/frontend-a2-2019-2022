@@ -6,6 +6,7 @@ import Loading from "../components/Loading";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { dropDownHeaderState, userState } from "../state";
 import ClassStructurePage from "../components/ClassStructure";
+import WhiteBorderButton from "../components/WhiteBorderButton";
 
 export default function ClassMember() {
   const [user, setUser] = useState<UserDto[]>([])
@@ -74,13 +75,7 @@ export default function ClassMember() {
         </div>
 
         <div className="mt-8">
-          <button
-            type="button"
-            className=" text-white border-white border-4 text-2xl font-extrabold py-4 px-10 rounded-full shadow-2xl transform hover:scale-110 hover:rotate-6 hover:shadow-2xl hover:ring-4 hover:ring-blue-300 transition-all duration-500 ease-in-out"
-            onClick={() => setShowClassStructure(true)}
-          >
-            Cơ cấu lớp
-          </button>
+          <WhiteBorderButton showSomething={setShowClassStructure} name="Cơ cấu lớp"/>
         </div>
       </div>
       {showClassStructure && <ClassStructurePage members={user} onClose={() => setShowClassStructure(false)}/>}

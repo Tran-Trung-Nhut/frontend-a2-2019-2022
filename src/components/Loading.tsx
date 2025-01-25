@@ -22,7 +22,7 @@ export default function Loading() {
         </p>
 
         <p className="text-sm text-gray-500 italic mb-4">
-          Ở lần đầu truy cập sẽ phải chờ lâu do máy chủ sẽ cần tối đa <i className="font-bold">1 phút</i> để khởi động lại sau 15 phút không được truy cập. <p>Mong các bạn thông cảm!</p>
+          Ở lần đầu truy cập sẽ phải chờ tối đa <i className="font-bold">1 phút</i> để khởi động lại nếu sau 15 phút không được truy cập. <p>Mong các bạn thông cảm vì sự bất tiện này!</p>
         </p>
 
         {/* <p className="text-sm text-gray-800 font-medium">

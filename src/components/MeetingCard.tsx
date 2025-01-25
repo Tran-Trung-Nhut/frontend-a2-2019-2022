@@ -25,8 +25,8 @@ export default function MeetingCard ({
             <p className="text-lg font-semibold text-gray-800">
                 <strong>Ngày diễn ra:</strong> {formatDate(meeting.date)}
             </p>
-            <p className={`text-md mt-2 ${meeting.status === 'Yes' ? 'text-green-600' : 'text-gray-600'}`}>
-                <strong className="text-gray-600">Trạng thái:</strong> {meeting.status === 'Yes' ? 'Sắp tới' : 'Đã kết thúc'}
+            <p className={`text-md mt-2 ${new Date(meeting.date) > new Date() ? 'text-green-600' : 'text-gray-600'}`}>
+                <strong className="text-gray-600">Trạng thái:</strong> {new Date(meeting.date) > new Date() ? 'Sắp diễn ra' : 'Đã kết thúc'}
             </p>
 
             <h4 className="text-lg font-bold text-blue-800 mt-4">Lịch trình:</h4>

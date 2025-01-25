@@ -12,9 +12,9 @@ export default function FeaturePopup({ onClose }: { onClose: () => void }) {
         <p className="text-2xl text-gray-800 font-semibold mb-4">
           Tính năng sắp ra mắt!
         </p>
-        <p className="text-sm text-gray-500 italic mb-6">
+        {/* <p className="text-sm text-gray-500 italic mb-6">
           Vui lòng đợi Trung Nhựt thi xong nhé.
-        </p>
+        </p> */}
         <button
           onClick={onClose}
           className="mt-4 bg-gradient-to-r from-blue-500 to-teal-400 text-white py-2 px-6 rounded-lg transform transition-all duration-300 hover:scale-110 hover:shadow-xl active:scale-90"

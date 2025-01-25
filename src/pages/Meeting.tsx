@@ -14,6 +14,7 @@ import MeetingCard from "../components/MeetingCard";
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
+import WhiteBorderButton from "../components/WhiteBorderButton";
 
 
 export default function Meeting() {
@@ -82,15 +83,17 @@ export default function Meeting() {
             {isShowForum && (
                 <Forum
                 onClose={() => setIsShowForum(false)}
-                meetingId={selectedMeeting.id}
+                meeting={selectedMeeting}
                 />
             )}
             <div
                 className="absolute inset-0 bg-cover bg-center filter blur-sm"
                 style={{ backgroundImage: `url(${background})` }}
             ></div>
-
-            <div className="relative sm:mt-5 mt-10">
+            <div className="my-5 flex justify-center items-center">
+                <WhiteBorderButton showSomething={setShowNewFeature} name="Tạo cuộc họp mới"/>
+            </div>
+            <div className="relative mb-5">
                 <Swiper
                     effect="coverflow"
                     grabCursor={false}
@@ -113,7 +116,6 @@ export default function Meeting() {
                             slidesPerView: 1,
                         },
                     }}
-                
                     modules={[EffectCoverflow, Pagination]}
                 >
                     {meetings.map((meeting) => (

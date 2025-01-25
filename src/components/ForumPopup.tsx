@@ -1,18 +1,20 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { MessageDto } from "../dtos/message.dto";
 import axios from "axios";
 import { useRecoilValue } from "recoil";
 import { userState } from "../state";
 import Loading from "./Loading";
 import { toZonedTime } from 'date-fns-tz';
+import ChatInputArea from "./ChatInputArea";
+import { MeetingWithTimeDescriptionDto } from "../dtos/meeting.dto";
 
 
 export default function Forum({
   onClose,
-  meetingId,
+  meeting,
 }: {
   onClose: () => void;
-  meetingId: string;
+  meeting: MeetingWithTimeDescriptionDto;
 }) {
   const [messages, setMessages] = useState<MessageDto[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -22,14 +24,31 @@ export default function Forum({
   const [currentMeeting, setCurrentMeeting] = useState<string>("")
   const user = useRecoilValue(userState)
 
+  const handleSendMessageByEnter = async (e: any) => {
+    if(e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault()
+      handleSendMessage()
+    }
+  }
+
+  const overThirdtyDays = () => {
+    const now = new Date();
+    const meetingDate = new Date(meeting.date);
+
+    const timeDifference = now.getTime() - meetingDate.getTime();
+    const daysDifference = timeDifference / (1000 * 3600 * 24);
+
+    return daysDifference > 30
+  }
+
   const handleSendMessage = async () => {
     if(!content){
       alert("Không thể gửi nội dung trống!")
       return
     }
 
-    if(meetingId !== currentMeeting){
-      alert("Cuộc họp này đã kết thúc, không thể gửi tin nhắn vào!")
+    if(overThirdtyDays()){
+      alert("Cuộc họp này đã kết thúc quá 1 tháng, không thể gửi tin nhắn vào!")
       return
     }
 
@@ -37,7 +56,7 @@ export default function Forum({
       setLoading(true)
       await axios.post('https://backend-a2-2019-2022.onrender.com/message/create',{
         content,
-        meetingId,
+        meetingId: meeting.id,
         userName: user.name
       })
       
@@ -53,7 +72,7 @@ export default function Forum({
   const fetchMessages = async () => {
     try {
       const response = await axios.get(
-        `https://backend-a2-2019-2022.onrender.com/message/meeting/${meetingId}`
+        `https://backend-a2-2019-2022.onrender.com/message/meeting/${meeting.id}`
       );
       setMessages(response.data.data);
 
@@ -75,7 +94,7 @@ export default function Forum({
   const fetchAcceptedUserAndCurrentMeeting = async () => {
     try{
       const responseUser = await axios.get(
-        `https://backend-a2-2019-2022.onrender.com/userMeeting/listUserAccepted/name/${meetingId}`
+        `https://backend-a2-2019-2022.onrender.com/userMeeting/listUserAccepted/name/${meeting.id}`
       );
 
       setNames(responseUser.data.data)
@@ -139,7 +158,7 @@ export default function Forum({
               Không có tin nhắn nào trong diễn đàn.
             </p>
           ) : (
-            currentMeeting === meetingId ? (
+            currentMeeting === meeting.id ? (
               names.includes(user.name) || user.role === "Chủ nhiệm" ? (
                 messages.map((message) => (
                   <div
@@ -174,7 +193,18 @@ export default function Forum({
                             : "bg-[#e7f2f1] text-[#4b4e42]"
                         }`}
                       >
-                        <p className="text-sm">{message.updateDate !== null ? message.content : <i className="italic">Tin nhắn đã được thu hồi</i>}</p>
+                        <p className="text-sm">
+                          {message.updateDate !== null ? (
+                            message.content.split('\n').map((line, index) => (
+                              <React.Fragment key={index}>
+                                {line}
+                                <br />
+                              </React.Fragment>
+                            ))
+                          ) : (
+                            <i className="italic">Tin nhắn đã được thu hồi</i>
+                          )}
+                        </p>
                       </div>
                       <p
                         className={`text-xs mt-1 ${
@@ -211,7 +241,7 @@ export default function Forum({
                   </div>
                 ))
               ) : (
-                <div className="p-4 sm:h-[100%] md:h-80 h-[85%] overflow-y-auto space-y-4 bg-white">
+                <div className="p-4 sm:h-[100%] md:h-[200px] h-[85%] overflow-y-auto space-y-4 bg-white">
                   <p className="text-gray-500 text-center font-bold text-xl"><i>Hãy xác nhận tham gia để xem diễn đàn</i></p>
                 </div>
               )
@@ -249,7 +279,18 @@ export default function Forum({
                           : "bg-[#e7f2f1] text-[#4b4e42]"
                       }`}
                     >
-                      <p className="text-sm">{message.updateDate !== null ? message.content : <i className="italic">Tin nhắn đã được thu hồi</i>}</p>
+                      <p className="text-sm">
+                        {message.updateDate !== null ? (
+                          message.content.split('\n').map((line, index) => (
+                            <React.Fragment key={index}>
+                              {line}
+                              <br />
+                            </React.Fragment>
+                          ))
+                        ) : (
+                          <i className="italic">Tin nhắn đã được thu hồi</i>
+                        )}
+                      </p>
                     </div>
                     <p
                       className={`text-xs mt-1 ${
@@ -283,40 +324,22 @@ export default function Forum({
           </div>
         )}
 
-        <div className="p-4 border-t bg-[#d1e4dd] flex items-center space-x-2 shadow-inner">
-            {currentMeeting === meetingId || user.role === "Chủ nhiệm"? (
+        <div className="p-4 border-t bg-[#d1e4dd] h-20 flex items-center space-x-2 shadow-inner">
+            {currentMeeting === meeting.id || user.role === "Chủ nhiệm"? (
               user.name !== "" && ( names.includes(user.name) || user.role === "Chủ nhiệm" ) && (
-                <>
-                 <input
-                 type="text"
-                 value={content}
-                 placeholder="Soạn tin nhắn"
-                 className="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring text-[#3f8c73] border-[#49a185] shadow-sm"
-                 onChange={(e) => setContent(e.target.value)}
-                 />
-                 <button 
-                 className="px-4 py-2 bg-[#7ca89a] text-white rounded-lg hover:bg-[#49a185] transition-all transform hover:scale-110"
-                 onClick={() => handleSendMessage()}>
-                   Gửi
-                 </button>
-                </>
+                <ChatInputArea 
+                content={content} 
+                setContent={setContent} 
+                handleSendMessageByEnter={handleSendMessageByEnter} 
+                handleSendMessage={handleSendMessage}/>
                )
             ) : (
               user.name !== "" &&  (
-                <>
-                 <input
-                 type="text"
-                 value={content}
-                 placeholder="Soạn tin nhắn"
-                 className="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring text-[#3f8c73] border-[#49a185] shadow-sm"
-                 onChange={(e) => setContent(e.target.value)}
-                 />
-                 <button 
-                 className="px-4 py-2 bg-[#7ca89a] text-white rounded-lg hover:bg-[#49a185] transition-all transform hover:scale-110"
-                 onClick={() => handleSendMessage()}>
-                   Gửi
-                 </button>
-                </>
+                <ChatInputArea 
+                content={content} 
+                setContent={setContent} 
+                handleSendMessageByEnter={handleSendMessageByEnter} 
+                handleSendMessage={handleSendMessage}/>
               )
             )}
         </div>
