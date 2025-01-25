@@ -24,13 +24,6 @@ export default function Forum({
   const [currentMeeting, setCurrentMeeting] = useState<string>("")
   const user = useRecoilValue(userState)
 
-  const handleSendMessageByEnter = async (e: any) => {
-    if(e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault()
-      handleSendMessage()
-    }
-  }
-
   const overThirdtyDays = () => {
     const now = new Date();
     const meetingDate = new Date(meeting.date);
@@ -330,7 +323,6 @@ export default function Forum({
                 <ChatInputArea 
                 content={content} 
                 setContent={setContent} 
-                handleSendMessageByEnter={handleSendMessageByEnter} 
                 handleSendMessage={handleSendMessage}/>
                )
             ) : (
@@ -338,7 +330,6 @@ export default function Forum({
                 <ChatInputArea 
                 content={content} 
                 setContent={setContent} 
-                handleSendMessageByEnter={handleSendMessageByEnter} 
                 handleSendMessage={handleSendMessage}/>
               )
             )}
