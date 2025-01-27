@@ -31,12 +31,12 @@ export default function Meeting() {
         try {
             const response = await axios.get('https://backend-a2-2019-2022.onrender.com/meeting');
 
-            if(user.name !== ''){
-                await axios.patch('https://backend-a2-2019-2022.onrender.com/user/lastAccess',{
+            if (user.name !== '') {
+                await axios.patch('https://backend-a2-2019-2022.onrender.com/user/lastAccess', {
                     name: user.name,
                 })
             }
-            
+
             setMeetings(response.data.data);
             setLoading(false)
         } catch (e) {
@@ -47,7 +47,7 @@ export default function Meeting() {
     const handleShowUser = async (meeting: MeetingWithTimeDescriptionDto) => {
         try {
             setSelectedMeeting(meeting),
-            setIsPopupOpen(true)
+                setIsPopupOpen(true)
         } catch (error) {
             alert("Có lỗi xảy ra vui lòng thử lại!")
         }
@@ -70,20 +70,20 @@ export default function Meeting() {
         <div className="relative min-h-screen overflow-hidden" onClick={() => setDropdownOpen(false)}>
             {isPopupOpen && (
                 <AcceptedUser
-                onClose={() => setIsPopupOpen(false)}
-                meeting={selectedMeeting}
+                    onClose={() => setIsPopupOpen(false)}
+                    meeting={selectedMeeting}
                 />
             )}
             {loading && (
-                <Loading/>
+                <Loading />
             )}
             {showNewFeature && (
-                <FeaturePopup onClose={() => setShowNewFeature(false)}/>
+                <FeaturePopup onClose={() => setShowNewFeature(false)} />
             )}
             {isShowForum && (
                 <Forum
-                onClose={() => setIsShowForum(false)}
-                meeting={selectedMeeting}
+                    onClose={() => setIsShowForum(false)}
+                    meeting={selectedMeeting}
                 />
             )}
             <div
@@ -91,7 +91,9 @@ export default function Meeting() {
                 style={{ backgroundImage: `url(${background})` }}
             ></div>
             <div className="my-5 flex justify-center items-center">
-                <WhiteBorderButton showSomething={setShowNewFeature} name="Tạo cuộc họp mới"/>
+                <WhiteBorderButton 
+                showSomething={setShowNewFeature} 
+                name="Tạo cuộc họp mới" />
             </div>
             <div className="relative mb-5">
                 <Swiper
@@ -107,7 +109,7 @@ export default function Meeting() {
                         modifier: 1,
                         slideShadows: false,
                     }}
-                    pagination={{ clickable: true}}
+                    pagination={{ clickable: true }}
                     breakpoints={{
                         640: {
                             slidesPerView: 3,
@@ -119,8 +121,13 @@ export default function Meeting() {
                     modules={[EffectCoverflow, Pagination]}
                 >
                     {meetings.map((meeting) => (
-                        <SwiperSlide key={meeting.id} className="">
-                            <MeetingCard meeting={meeting} handleShowForum={handleShowForum} handleShowUser={handleShowUser}/>
+                        <SwiperSlide 
+                        key={meeting.id} 
+                        className="">
+                            <MeetingCard 
+                            meeting={meeting} 
+                            handleShowForum={handleShowForum} 
+                            handleShowUser={handleShowUser} />
                         </SwiperSlide>
                     ))}
                 </Swiper>

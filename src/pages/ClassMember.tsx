@@ -75,7 +75,9 @@ export default function ClassMember() {
         </div>
 
         <div className="mt-8">
-          <WhiteBorderButton showSomething={setShowClassStructure} name="Cơ cấu lớp"/>
+          <WhiteBorderButton 
+          showSomething={setShowClassStructure} 
+          name="Cơ cấu lớp"/>
         </div>
       </div>
       {showClassStructure && <ClassStructurePage members={user} onClose={() => setShowClassStructure(false)}/>}
