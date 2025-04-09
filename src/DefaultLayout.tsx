@@ -4,7 +4,7 @@ import Footer from "./components/Footer";
 
 export default function DefaultLayout () {
     return(
-        <div className="w-screen">
+        <div className="w-[98.8vw] scrollbar-hide">
             <Header/>
             <Outlet/>
             <Footer/>
