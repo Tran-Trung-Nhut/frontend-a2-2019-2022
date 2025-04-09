@@ -40,7 +40,7 @@ export default function ClassMember() {
       style={{backgroundImage: `url(${background})`}}
     >
       {loading && <Loading/>}
-      <div className="w-full h-full sm:w-[100%] sm:h-[100%] p-6 sm:p-10 bg-black bg-opacity-80 overflow-auto scrollbar-hide">
+      <div className="w-full h-full sm:w-[100%] sm:h-[100%] p-6 sm:p-10 bg-black bg-opacity-60 overflow-auto scrollbar-hide">
         <div className="flex justify-center items-center mb-12">
           <h1 className="text-4xl sm:text-5xl font-extrabold text-transparent text-white">
             Cơ Cấu Lớp Học
