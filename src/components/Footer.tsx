@@ -15,7 +15,7 @@ export default function Footer() {
           <div className="space-y-1">
             <p className="text-xs text-gray-400">Người phát triển ứng dụng:</p>
             
-            <p className="text-xl font-semibold">Trần Trung Nhựt</p>
+            <p className="text-xl font-semibold"><a href="https://trantrungnhut.vercel.app" target="_blank" className="text-white hover:text-white">Trần Trung Nhựt</a></p>
             
             <p className="text-xs text-gray-400">Nguyên Tổ trưởng Tổ 2 - A2 khóa 2019-2022 - Trường THPT Thanh Bình 2</p>
             <p className="text-xs text-gray-400">Nguyên Ủy viên Ban Thường vụ Đoàn khoa Khoa học và Kỹ thuật Máy tính</p>
